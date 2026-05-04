@@ -1,9 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Search, ShoppingBag, User, Menu, X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const navLinks = [
   { href: "/new", label: "NEW" },
@@ -64,10 +73,30 @@ export function Header() {
               <Heart className="h-5 w-5" />
               <span className="sr-only">위시리스트</span>
             </Button>
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-              <span className="sr-only">마이페이지</span>
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost" size="icon" type="button">
+                  <User className="h-5 w-5" />
+                  <span className="sr-only">마이페이지</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>마이페이지</DialogTitle>
+                  <DialogDescription>환영합니다!</DialogDescription>
+                </DialogHeader>
+                <div className="relative mx-auto h-[260px] w-full max-w-sm">
+                  <Image
+                    src="/frog.png"
+                    alt="녹색 청개구리"
+                    fill
+                    className="object-contain object-center drop-shadow-sm"
+                    sizes="(max-width: 640px) 100vw, 384px"
+                    priority
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
             <Button variant="ghost" size="icon" className="relative">
               <ShoppingBag className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center">
